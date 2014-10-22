@@ -31,6 +31,7 @@
   <script type="text/javascript">
     var colors = ["#ff4200", "#72ff00", "#00f0ff", "#1200ff", "#f600ff", "#ff0024"];
     var i = 0;
+    var intervalId = null;
 
     function changeColor() {
       elem = document.getElementById("count");
@@ -39,7 +40,24 @@
     }
 
     function initHighDefinitionFX() {
-      setInterval(changeColor, 100);
+      intervalId = setInterval(changeColor, 100);
+    }
+    
+    // Convert range [0,100] to milliseconds from range [20,300]
+    function slider2ms(sliderValue) {
+      var slider1 = 0.0;
+      var ms1 = 300.0;
+      var slider2 = 100.0;
+      var ms2 = 20.0;
+      
+      return (ms2 - ms1)/(slider2 - slider1)*(sliderValue - slider1) + ms1;
+    }
+    
+    function changeEffect() {
+      clearInterval(intervalId);
+      var level = document.getElementById("seizureSlider").value;
+      if (level == 0) return;
+      intervalId = setInterval(changeColor, slider2ms(level));
     }
 
   </script>
@@ -48,6 +66,9 @@
     <h1 id="count"><%= @bonus_points.points %></h1>
     <h2 class="pts_desc">TOTAL BONUS POINTS!</h2>
     <p><%= @remaining_until_party %> more points until end-of-term party and once in a lifetime performance by Steve Wolfram. More <a href="http://www.ugrad.cs.ubc.ca/~cs311/current/_bonus.php">Details</a></p>
+    <div>
+      <input type="range" id="seizureSlider" value=72 onchange="changeEffect()"><br><small>Adjust your seizure level.</small>
+    </div>
     <p><small>Last updated: <%= time_ago_in_words(@bonus_points.created_at) %> ago</small></p>
   </body>
 
