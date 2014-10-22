@@ -1,8 +1,10 @@
 require "navona"
 
 class BonusPoint < ActiveRecord::Base
-  def update_points
+  def self.update_points
     bonus_points = Navona.execute
-    BonusPoint.create({points: bonus_points})
+    if bonus_points > 2
+      BonusPoint.create({points: bonus_points})
+    end
   end
 end

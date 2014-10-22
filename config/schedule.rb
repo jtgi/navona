@@ -5,8 +5,6 @@
 
 # Example:
 #
-set :output, "#{Rails.root}/log/cron_log.log"
-
 every 15.minutes do
    runner "BonusPoint.update_points"
 end
