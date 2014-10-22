@@ -55,7 +55,7 @@
     
     function changeEffect() {
       clearInterval(intervalId);
-      var level = document.getElementById("seizureSlider").value;
+      var level = document.getElementById("funSlider").value;
       if (level == 0) return;
       intervalId = setInterval(changeColor, slider2ms(level));
     }
@@ -67,7 +67,7 @@
     <h2 class="pts_desc">TOTAL BONUS POINTS!</h2>
     <p><%= @remaining_until_party %> more points until end-of-term party and once in a lifetime performance by Steve Wolfram. More <a href="http://www.ugrad.cs.ubc.ca/~cs311/current/_bonus.php">Details</a></p>
     <div>
-      <input type="range" id="seizureSlider" value=72 onchange="changeEffect()"><br><small>Adjust your seizure level.</small>
+      <input type="range" id="funSlider" value=72 onchange="changeEffect()"><br><small>fun-o-meter.</small>
     </div>
     <p><small>Last updated: <%= time_ago_in_words(@bonus_points.created_at) %> ago</small></p>
   </body>
