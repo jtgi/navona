@@ -1,0 +1,55 @@
+<html>
+  <title>BONUS TIME <%= @bonus_points.points %></title>
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,900,500,100' rel='stylesheet' type='text/css'>
+
+  <style type="text/css">
+    body {
+      text-align:center;
+      font-family:"Roboto", sans-serif;
+      width:100%;
+  }
+
+  h1 {
+    margin-top:0;
+    font-size:35vw;
+    line-height:1em;
+    font-weight:900;
+    margin-bottom:15px;
+  }
+
+  h2 {
+    margin-top:0px;
+    font-size:5vw;
+  }
+
+  .pts_desc {
+    text-transform:capitalize;
+    font-family:5em;
+  }
+  </style>
+
+  <script type="text/javascript">
+    var colors = ["#ff4200", "#72ff00", "#00f0ff", "#1200ff", "#f600ff", "#ff0024"];
+    var i = 0;
+
+    function changeColor() {
+      elem = document.getElementById("count");
+      elem.style.color = colors[i++];
+      i = (i >= colors.length) ? 0 : i;
+    }
+
+    function initHighDefinitionFX() {
+      setInterval(changeColor, 20);
+    }
+
+  </script>
+
+  <body onload="initHighDefinitionFX();">
+    <h1 id="count"><%= @bonus_points.points %></h1>
+    <h2 class="pts_desc">TOTAL BONUS POINTS!</h2>
+    <p><%= @remaining_until_party %> more points until end-of-term party and once in a lifetime performance by Steve Wolfram. More <a href="http://www.ugrad.cs.ubc.ca/~cs311/current/_bonus.php">Details</a></p>
+    <p><small>Last updated: <%= time_ago_in_words(@bonus_points.created_at) %> ago</small></p>
+  </body>
+
+</html>
+
